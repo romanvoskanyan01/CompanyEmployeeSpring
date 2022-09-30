@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Employees</title>
+</head>
+<body>
+
+<table border="1">
+    <tr>
+        <th>id</th>
+        <th>name</th>
+        <th>surname</th>
+        <th>email</th>
+        <th>phoneNumber</th>
+        <th>salary</th>
+        <th>position</th>
+        <th>company</th>
+        <th>profilePic</th>
+    </tr>
+
+    <tr th:each="employees: ${employees}">
+        <td th:text="${employees.id}"></td>
+        <td th:text="${employees.name}"></td>
+        <td th:text="${employees.surname}"></td>
+        <td th:text="${employees.email}"></td>
+        <td th:text="${employees.phoneNumber}"></td>
+        <td th:text="${employees.salary}"></td>
+        <td th:text="${employees.position}"></td>
+        <td th:text="${employees.company eq null ? 'unassigned' : employees.company.name}"></td>
+        <td>
+            <img th:if="${employees.profilePic != null}"
+                 th:src="@{/employees/getImage(fileName=${employees.profilePic})}" width="40" height="40">
+        </td>
+
+
+        </td>
+
+        <td><a th:href="@{/employees/delete(id=${employees.id})}">Delete</a></td>
+        </td>
+    </tr>
+
+</table>
+<a href="/employees/add">
+    <input type="submit" value="employeesAdd">
+</a>
+
+</body>
+</html>
